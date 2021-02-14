@@ -1,5 +1,6 @@
 <template>
-  <div>Labels
+  <div class="navWrapper">
+    <div class="content">Labels</div>
     <Nav/>
   </div>
 </template>
@@ -11,5 +12,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.navWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 
+  .content {
+    flex-grow: 1;
+    overflow: auto;
+  }
+}
 </style>
