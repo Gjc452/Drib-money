@@ -1,25 +1,16 @@
 <template>
-  <div class="navWrapper">
-    <div class="content">Labels</div>
-    <Nav/>
-  </div>
+  <Layout>
+    <div>Labels</div>
+  </Layout>
+
 </template>
 
 <script lang="ts">
 export default {
-  name:'Labels',
-}
+  name: 'Labels',
+};
 </script>
 
 <style lang="scss" scoped>
-.navWrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 
-  .content {
-    flex-grow: 1;
-    overflow: auto;
-  }
-}
 </style>
