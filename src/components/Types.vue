@@ -11,21 +11,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Types',
-  data() {
-    return {
-      type: '-' // '-'表示支出,'+'表示收入
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+
+@Component
+export default class Types extends Vue {
+  type = '-';
+
+  selectType(type: '-' | '+') {
+    if (type !== '-' && type !== '+') {
+      throw new Error('type is unknown');
     }
-  },
-  methods: {
-    selectType(type) { // type 只能是'-'和+'
-      if (type !== '-' && type !== '+') {
-        throw new Error('type is unknown')
-      }
-      this.type = type
-    }
+    this.type = type;
   }
 }
 </script>
