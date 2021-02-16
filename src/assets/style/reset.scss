@@ -8,3 +8,14 @@ a {
   padding: 0;
   box-sizing: border-box;
 }
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+}
+:focus{
+  outline: none;
+}
