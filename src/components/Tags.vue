@@ -4,7 +4,7 @@
       <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
-      <li @click="toggle(tag)" v-for="tag in dataSource"
+      <li @click="toggle(tag)" v-for="tag in tags"
           :key="tag" :class="{selected:value.indexOf(tag)>=0}">{{ tag }}
       </li>
     </ul>
@@ -14,11 +14,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import tagListModel from '@/models/tagListModel';
 
+tagListModel.fetch();
 @Component
 export default class Tags extends Vue {
-  @Prop(Array) dataSource: string[] | undefined;
   @Prop(Array) readonly value!: string[];
+  tags = tagListModel.data;
 
   toggle(tag: string) {
     const index = this.value.indexOf(tag);
@@ -33,10 +35,11 @@ export default class Tags extends Vue {
   createTag() {
     const name = window.prompt('请输入需要添加的标签');
     if (name === '') {
-      return;
-    } else {
-      if (this.dataSource && name) {
-        this.$emit('update:dataSource', [...this.dataSource, name]);
+      window.alert('标签名不能为空');
+    } else if (name) {
+      const message = tagListModel.create(name);
+      if (message === 'duplicated') {
+        window.alert('标签名已存在');
       }
     }
   }
