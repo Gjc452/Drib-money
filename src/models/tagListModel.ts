@@ -1,26 +1,31 @@
 const tagListKeyName = 'tagList';
+type Tag = {
+  id: string;
+  name: string;
+}
 type TagListModel = {
-  data: string[];
-  fetch: () => string[];
+  data: Tag[];
+  fetch: () => Tag[];
   create: (name: string) => 'duplicated' | 'success';
   save: () => void;
 }
 const tagListModel: TagListModel = {
   data: [],
   fetch() {
-    this.data = JSON.parse(window.localStorage.getItem(tagListKeyName) || '["衣","食","住","行"]');
+    this.data = JSON.parse(window.localStorage.getItem(tagListKeyName) || '[]');
     return this.data;
   },
   create(name) {
-    if (this.data.indexOf(name) >= 0) {
+    const names = this.data.map(item => item.name);
+    if (names.indexOf(name) >= 0) {
       return 'duplicated';
     }
-    this.data.push(name);
-    this.save;
+    this.data.push({id: name, name: name});
+    this.save();
     return 'success';
   },
   save() {
     window.localStorage.setItem(tagListKeyName, JSON.stringify(this.data));
-  }
+  },
 };
 export default tagListModel;
