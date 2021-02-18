@@ -10,7 +10,8 @@ const recordListModel = {
     this.save();
   },
   fetch() {
-    return JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
+    this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
+    return this.data;
 
   },
   save() {
