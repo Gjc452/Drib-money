@@ -27,9 +27,7 @@ export default class Money extends Vue {
   recordList: RecordItem[] = recordList;
 
   saveRecord() {
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createAt = new Date();
-    this.recordList.push(record2);
+    recordListModel.create(this.record);
   }
 
   onUpdateNotes(value: string) {
@@ -38,7 +36,7 @@ export default class Money extends Vue {
 
   @Watch('recordList')
   onRecordListChange() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 </script>
