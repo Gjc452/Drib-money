@@ -11,7 +11,7 @@ type TagListModel = {
   create: (name: string) => 'duplicated' | 'success';
   save: () => void;
   update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
-  remove: (id: string) => void;
+  remove: (id: string) => boolean;
 }
 const tagListModel: TagListModel = {
   data: [],
@@ -34,6 +34,7 @@ const tagListModel: TagListModel = {
     const index = idList.indexOf(id);
     this.data.splice(index, 1);
     this.save();
+    return true
   },
   save() {
     window.localStorage.setItem(tagListKeyName, JSON.stringify(this.data));
