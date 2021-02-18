@@ -16,11 +16,11 @@ import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
 
-tagListModel.fetch();
+
 @Component
 export default class Tags extends Vue {
   @Prop(Array) readonly value!: string[];
-  tags = tagListModel.data;
+  tags = window.tagList;
 
   toggle(tag: string) {
     const index = this.value.indexOf(tag);
