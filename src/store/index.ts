@@ -52,6 +52,26 @@ const store = new Vuex.Store({
     setCurrentTag(state, id: string) {
       state.currentTag = state.tagList.filter(t => t.id === id)[0];
     },
+    updateTag(state, payload: { id: string; name: string }) {
+      const {id, name} = payload;
+      const idList = state.tagList.map(item => item.id);
+      if (idList.indexOf(id) >= 0) {
+        const names = state.tagList.map(item => item.name);
+        if (names.indexOf(name) >= 0) {
+          window.alert('标签已重复');
+        } else {
+          const tag = state.tagList.filter(item => item.id === id)[0];
+          tag.name = name;
+          store.commit('saveTags');
+        }
+      }
+    },
+    removeTag(state, id: string) {
+      const idList = state.tagList.map(item => item.id);
+      const index = idList.indexOf(id);
+      state.tagList.splice(index, 1);
+      store.commit('saveTags');
+    }
   },
 });
 export default store;
