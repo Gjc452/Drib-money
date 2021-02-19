@@ -7,25 +7,29 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
+      <Button class="createTag" @click.native="createTag">新建标签</Button>
     </div>
   </Layout>
-
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import Button from '@/components/Button.vue';
+import {TagHelper} from '@/mixins/TagHelper';
+import {mixins} from 'vue-class-component';
 
 
-@Component
-export default class Labels extends Vue {
-  // tags = store.tagList;
-  // TODO
-  tags = []
-  createTag() {
-    const name = window.prompt('请输入需要添加的标签');
-    // store.createTag(name);
+@Component({
+  components: {Button},
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    }
+  }
+})
+export default class Labels extends mixins(TagHelper) {
+  beforeCreate() {
+    this.$store.commit('fetchTags');
   }
 }
 </script>

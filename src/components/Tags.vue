@@ -12,8 +12,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import {mixins} from 'vue-class-component';
+import {TagHelper} from '@/mixins/TagHelper';
 
 
 @Component({
@@ -23,7 +24,7 @@ import {Component, Prop} from 'vue-property-decorator';
     }
   }
 })
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper) {
   @Prop(Array) readonly value!: string[];
 
   created() {
@@ -38,11 +39,6 @@ export default class Tags extends Vue {
       this.value.splice(index, 1);
     }
     this.$emit('update:value', this.value);
-  }
-
-  createTag() {
-    const name = window.prompt('请输入需要添加的标签');
-    this.$store.commit('createTag', name);
   }
 }
 </script>
