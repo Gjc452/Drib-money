@@ -14,13 +14,18 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import store from '@/store/index2';
 
 
-@Component
+@Component({
+  computed: {
+    tags() {
+      // return this.$store.state.tagList
+      return [];
+    }
+  }
+})
 export default class Tags extends Vue {
   @Prop(Array) readonly value!: string[];
-  tags = store.tagList;
 
   toggle(tag: string) {
     const index = this.value.indexOf(tag);
@@ -34,7 +39,7 @@ export default class Tags extends Vue {
 
   createTag() {
     const name = window.prompt('请输入需要添加的标签');
-    store.createTag(name);
+    // store.createTag(name);
   }
 }
 </script>
