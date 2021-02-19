@@ -20,14 +20,13 @@ import store2 from '@/store/index';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
-  computed: {
-    count() {
-      return store2.state.recordList;
-    }
-  }
 })
 export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
+
+  get count() {
+    return store2.state.recordList;
+  }
 
   created() {
     this.$store.commit('fetchRecords');
