@@ -3,7 +3,7 @@
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <div class="notes">
-      <FormItem field-name="备注" @update:value="onUpdateNotes" placeholder="在这里输入备注"/>
+      <FormItem field-name="备注" :value.sync="record.notes" placeholder="在这里输入备注"/>
     </div>
     <Tags :value.sync="record.tags"/>
   </Layout>
@@ -35,11 +35,14 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    this.$store.commit('createRecord', this.record);
-  }
-
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
+    if (this.record.tags.length === 0) {
+      window.alert('请至少选择一个标签');
+    } else if (this.record.amount === 0) {
+      window.alert('金额不能为0');
+    } else {
+      this.$store.commit('createRecord', this.record);
+      this.record.notes = '';
+    }
   }
 }
 </script>
