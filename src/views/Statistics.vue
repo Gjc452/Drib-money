@@ -8,13 +8,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import Types from '@/components/Types.vue';
 import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
 
 @Component({
-  components: {Tabs, Types}
+  components: {Tabs}
 })
 export default class Statistics extends Vue {
   intervalList = intervalList;
@@ -25,8 +24,7 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .type-tabs-item,
-::v-deep .interval-tabs-item {
+::v-deep .type-tabs-item, {
   background: white;
 
   &.selected {
@@ -36,5 +34,9 @@ export default class Statistics extends Vue {
       display: none;
     }
   }
+}
+
+::v-deep .interval-tabs-item{
+  height: 48px;
 }
 </style>
